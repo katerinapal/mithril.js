@@ -1,6 +1,5 @@
+import Vnode from "../render/vnode";
 "use strict"
-
-var Vnode = require("../render/vnode")
 
 var selectorParser = /(?:(^|#|\.)([^#\.\[\]]+))|(\[(.+?)(?:\s*=\s*("|'|)((?:\\["'\]]|.)*?)\5)?\])/g
 var selectorCache = {}
@@ -78,7 +77,7 @@ function execSelector(state, attrs, children) {
 	return Vnode(state.tag, attrs.key, hasAttrs ? attrs : undefined, childList, text)
 }
 
-function hyperscript(selector) {
+export default function hyperscript(selector) {
 	// Because sloppy mode sucks
 	var attrs = arguments[1], start = 2, children
 
@@ -113,5 +112,3 @@ function hyperscript(selector) {
 		return Vnode(selector, attrs.key, attrs, normalized)
 	}
 }
-
-module.exports = hyperscript

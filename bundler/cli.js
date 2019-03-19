@@ -1,9 +1,8 @@
+import minify from "./minify";
+import bundle from "./bundle";
 "use strict"
 
 var fs = require("fs");
-
-var bundle = require("./bundle")
-var minify = require("./minify")
 
 var aliases = {o: "output", m: "minify", w: "watch", a: "aggressive"}
 var params = {}

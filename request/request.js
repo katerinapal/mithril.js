@@ -1,10 +1,9 @@
+import buildQueryString from "../querystring/build";
 "use strict"
-
-var buildQueryString = require("../querystring/build")
 
 var FILE_PROTOCOL_REGEX = new RegExp("^file://", "i")
 
-module.exports = function($window, Promise) {
+export default function($window, Promise) {
 	var callbackCount = 0
 
 	var oncompletion
@@ -177,4 +176,4 @@ module.exports = function($window, Promise) {
 	}
 
 	return {request: request, jsonp: jsonp, setCompletionCallback: setCompletionCallback}
-}
+};;

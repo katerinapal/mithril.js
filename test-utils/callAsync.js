@@ -1,3 +1,3 @@
 "use strict"
 
-module.exports = typeof setImmediate === "function" ? setImmediate : setTimeout
+export default typeof setImmediate === "function" ? setImmediate : setTimeout;;

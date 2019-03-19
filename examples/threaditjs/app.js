@@ -1,6 +1,5 @@
+import * as m from "../../mithril";
 T.time("Setup");
-
-var m = require("../../mithril")
 
 //API calls
 var api = {

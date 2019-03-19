@@ -1,21 +1,32 @@
+import vnode from "./render/vnode";
+export { vnode };
+import buildQueryString from "./querystring/build";
+export { buildQueryString };
+import parseQueryString from "./querystring/parse";
+export { parseQueryString };
+import withAttr from "./util/withAttr";
+export { withAttr };
+import route from "./route";
+export { route };
+import mount from "./mount";
+export { mount };
+import redrawService from "./redraw";
+import requestService from "./request";
+import m from "./hyperscript";
 "use strict"
 
-var m = require("./hyperscript")
-var requestService = require("./request")
-var redrawService = require("./redraw")
+export default m;
 
 requestService.setCompletionCallback(redrawService.redraw)
 
-m.mount = require("./mount")
-m.route = require("./route")
-m.withAttr = require("./util/withAttr")
+mount
+route
+withAttr
 m.render = require("./render").render
 m.redraw = redrawService.redraw
 m.request = requestService.request
 m.jsonp = requestService.jsonp
-m.parseQueryString = require("./querystring/parse")
-m.buildQueryString = require("./querystring/build")
+parseQueryString
+buildQueryString
 m.version = "bleeding-edge"
-m.vnode = require("./render/vnode")
-
-module.exports = m
+vnode

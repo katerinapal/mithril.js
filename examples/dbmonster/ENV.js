@@ -1,3 +1,8 @@
+var ms;
+var seconds;
+var comps;
+var minutes;
+var str;
 var ENV = ENV || (function() {
 
   var first = true;

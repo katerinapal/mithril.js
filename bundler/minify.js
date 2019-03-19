@@ -4,7 +4,7 @@ var http = require("https")
 var querystring = require("querystring")
 var fs = require("fs")
 
-module.exports = function(input, output, options, done) {
+export default function(input, output, options, done) {
 	function minify(input, output) {
 		var code = fs.readFileSync(input, "utf8")
 
@@ -66,4 +66,4 @@ module.exports = function(input, output, options, done) {
 	run()
 
 	if (options && options.watch) fs.watchFile(input, run)
-}
+};;

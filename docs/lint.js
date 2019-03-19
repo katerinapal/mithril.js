@@ -1,4 +1,11 @@
 #!/usr/bin/env node
+import * as stream from "../stream";
+export { stream };
+import * as o from "../ospec/ospec";
+export { o };
+import m from "../index";
+export { m };
+import testutilsbrowserMock_moduleDefault from "../test-utils/browserMock";
 "use strict"
 
 var fs = require("fs")
@@ -101,11 +108,11 @@ function ensureLinkIsValid(file, data) {
 }
 
 function initMocks() {
-	global.window = require("../test-utils/browserMock")() // eslint-disable-line global-require
+	global.window = testutilsbrowserMock_moduleDefault() // eslint-disable-line global-require
 	global.document = window.document
-	global.m = require("../index") // eslint-disable-line global-require
-	global.o = require("../ospec/ospec") // eslint-disable-line global-require
-	global.stream = require("../stream") // eslint-disable-line global-require
+	m // eslint-disable-line global-require
+	o // eslint-disable-line global-require
+	stream // eslint-disable-line global-require
 	global.alert = function() {}
 
 	//routes consumed by request.md

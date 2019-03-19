@@ -14,7 +14,21 @@ options:
 - spy:(f: Function) => Function
 */
 
-module.exports = function(options) {
+/*
+Known limitations:
+
+- `option.selected` can't be set/read when the option doesn't have a `select` parent
+- `element.attributes` is just a map of attribute names => Attr objects stubs
+- ...
+
+*/
+
+/*
+options:
+- spy:(f: Function) => Function
+*/
+
+export default function(options) {
 	options = options || {}
 	var spy = options.spy || function(f){return f}
 	var spymap = []
@@ -528,4 +542,4 @@ module.exports = function(options) {
 	if (options.spy) $window.__getSpies = getSpies
 
 	return $window
-}
+};;

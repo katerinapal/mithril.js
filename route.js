@@ -1,5 +1,5 @@
+import apirouter_moduleDefault from "./api/router";
+import redrawService from "./redraw";
 "use strict"
 
-var redrawService = require("./redraw")
-
-module.exports = require("./api/router")(window, redrawService)
+export default apirouter_moduleDefault(window, redrawService);;

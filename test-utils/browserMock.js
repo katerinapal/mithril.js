@@ -1,10 +1,9 @@
+import xhrMock from "./xhrMock";
+import domMock from "./domMock";
+import pushStateMock from "./pushStateMock";
 "use strict"
 
-var pushStateMock = require("./pushStateMock")
-var domMock = require("./domMock")
-var xhrMock = require("./xhrMock")
-
-module.exports = function(env) {
+export default function(env) {
 	env = env || {}
 	var $window = env.window = {}
 
@@ -15,4 +14,4 @@ module.exports = function(env) {
 	pushStateMock(env)
 
 	return $window
-}
+};;

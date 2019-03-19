@@ -1,8 +1,7 @@
+import Vnode from "../render/vnode";
 "use strict"
 
-var Vnode = require("../render/vnode")
-
-module.exports = function(redrawService) {
+export default function(redrawService) {
 	return function(root, component) {
 		if (component === null) {
 			redrawService.render(root, [])
@@ -18,4 +17,4 @@ module.exports = function(redrawService) {
 		redrawService.subscribe(root, run)
 		redrawService.redraw()
 	}
-}
+};;

@@ -1,3 +1,4 @@
+import renderrender_moduleDefault from "./render/render";
 "use strict"
 
-module.exports = require("./render/render")(window)
+module.exports = renderrender_moduleDefault(window)

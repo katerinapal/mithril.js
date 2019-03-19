@@ -1,37 +1,11 @@
+import * as m from "../mithril";
+var mBinding = m;
+import browserMock from "../test-utils/browserMock";
 /* global Benchmark */
 "use strict"
 
-/* Based off of preact's perf tests, so including their MIT license */
-/*
-The MIT License (MIT)
-
-Copyright (c) 2017 Jason Miller
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*/
-
-var browserMock = require("../test-utils/browserMock")
-
 // Do this silly dance so browser testing works
 var B = typeof Benchmark === "undefined" ? require("benchmark") : Benchmark
-
-var m, scratch;
 
 // set up browser env on before running tests
 var doc = typeof document !== "undefined" ? document : null
@@ -42,9 +16,6 @@ if(!doc) {
 
 	doc = mock.document
 }
-
-// Have to include mithril AFTER browser polyfill is set up
-m = require("../mithril") // eslint-disable-line global-require
 
 scratch = doc.createElement("div");
 
@@ -72,40 +43,40 @@ suite.on("error", console.error.bind(console))
 suite.add({
 	name : "rerender without changes",
 	onStart : function() {
-		this.vdom = m("div", {class: "foo bar", "data-foo": "bar", p: 2},
-			m("header",
-				m("h1", {class: "asdf"}, "a ", "b", " c ", 0, " d"),
-				m("nav",
-					m("a", {href: "/foo"}, "Foo"),
-					m("a", {href: "/bar"}, "Bar")
+		this.vdom = mBinding("div", {class: "foo bar", "data-foo": "bar", p: 2},
+			mBinding("header",
+				mBinding("h1", {class: "asdf"}, "a ", "b", " c ", 0, " d"),
+				mBinding("nav",
+					mBinding("a", {href: "/foo"}, "Foo"),
+					mBinding("a", {href: "/bar"}, "Bar")
 				)
 			),
-			m("main",
-				m("form", {onSubmit: function onSubmit() {}},
-					m("input", {type: "checkbox", checked: true}),
-					m("input", {type: "checkbox", checked: false}),
-					m("fieldset",
-						m("label",
-							m("input", {type: "radio", checked: true})
+			mBinding("main",
+				mBinding("form", {onSubmit: function onSubmit() {}},
+					mBinding("input", {type: "checkbox", checked: true}),
+					mBinding("input", {type: "checkbox", checked: false}),
+					mBinding("fieldset",
+						mBinding("label",
+							mBinding("input", {type: "radio", checked: true})
 						),
-						m("label",
-							m("input", {type: "radio"})
+						mBinding("label",
+							mBinding("input", {type: "radio"})
 						)
 					),
-					m("button-bar",
-						m("button",
+					mBinding("button-bar",
+						mBinding("button",
 							{style: "width:10px; height:10px; border:1px solid #FFF;"},
 							"Normal CSS"
 						),
-						m("button",
+						mBinding("button",
 							{style: "top:0 ; right: 20"},
 							"Poor CSS"
 						),
-						m("button",
+						mBinding("button",
 							{style: "invalid-prop:1;padding:1px;font:12px/1.1 arial,sans-serif;", icon: true},
 							"Poorer CSS"
 						),
-						m("button",
+						mBinding("button",
 							{style: {margin: 0, padding: "10px", overflow: "visible"}},
 							"Object CSS"
 						)
@@ -115,7 +86,7 @@ suite.add({
 		)
 	},
 	fn : function() {
-		m.render(scratch, this.vdom)
+		mBinding.render(scratch, this.vdom)
 	}
 })
 
@@ -133,42 +104,42 @@ suite.add({
 	},
 
 	fn : function () {
-		m("div", {class: "foo bar", "data-foo": "bar", p: 2},
-			m("header",
-				m("h1", {class: "asdf"}, "a ", "b", " c ", 0, " d"),
-				m("nav",
-					m("a", {href: "/foo"}, "Foo"),
-					m("a", {href: "/bar"}, "Bar")
+		mBinding("div", {class: "foo bar", "data-foo": "bar", p: 2},
+			mBinding("header",
+				mBinding("h1", {class: "asdf"}, "a ", "b", " c ", 0, " d"),
+				mBinding("nav",
+					mBinding("a", {href: "/foo"}, "Foo"),
+					mBinding("a", {href: "/bar"}, "Bar")
 				)
 			),
-			m("main",
-				m("form",
+			mBinding("main",
+				mBinding("form",
 					{onSubmit: function onSubmit() {}},
-					m("input", {type: "checkbox", checked: true}),
-					m("input", {type: "checkbox"}),
-					m("fieldset",
+					mBinding("input", {type: "checkbox", checked: true}),
+					mBinding("input", {type: "checkbox"}),
+					mBinding("fieldset",
 						this.fields.map(function (field) {
-							return m("label",
+							return mBinding("label",
 								field,
 								":",
-								m("input", {placeholder: field})
-							)
+								mBinding("input", {placeholder: field})
+							);
 						})
 					),
-					m("button-bar",
-						m("button",
+					mBinding("button-bar",
+						mBinding("button",
 							{style: "width:10px; height:10px; border:1px solid #FFF;"},
 							"Normal CSS"
 						),
-						m("button",
+						mBinding("button",
 							{style: "top:0 ; right: 20"},
 							"Poor CSS"
 						),
-						m("button",
+						mBinding("button",
 							{style: "invalid-prop:1;padding:1px;font:12px/1.1 arial,sans-serif;", icon: true},
 							"Poorer CSS"
 						),
-						m("button",
+						mBinding("button",
 							{style: {margin: 0, padding: "10px", overflow: "visible"}},
 							"Object CSS"
 						)
@@ -212,122 +183,122 @@ suite.add({
 
 		this.count = 0
 		this.app = function (index) {
-			return m("div",
+			return mBinding("div",
 				{
 					class: get(classes, index),
 					"data-index": index,
 					title: index.toString(36)
 				},
-				m("input", {type: "checkbox", checked: index % 3 == 0}),
-				m("input", {value: "test " + (Math.floor(index / 4)), disabled: index % 10 ? null : true}),
-				m("div", {class: get(classes, index * 11)},
-					m("p", {style: get(styles, index)}, "p1"),
-					m("p", {style: get(styles, index + 1)}, "p2"),
-					m("p", {style: get(styles, index * 2)}, "p3"),
-					m("p", {style: get(styles, index * 3 + 1)}, "p4")
+				mBinding("input", {type: "checkbox", checked: index % 3 == 0}),
+				mBinding("input", {value: "test " + (Math.floor(index / 4)), disabled: index % 10 ? null : true}),
+				mBinding("div", {class: get(classes, index * 11)},
+					mBinding("p", {style: get(styles, index)}, "p1"),
+					mBinding("p", {style: get(styles, index + 1)}, "p2"),
+					mBinding("p", {style: get(styles, index * 2)}, "p3"),
+					mBinding("p", {style: get(styles, index * 3 + 1)}, "p4")
 				)
-			)
+			);
 		}
 	},
 
 	fn : function () {
-		m.render(scratch, this.app(++this.count))
+		mBinding.render(scratch, this.app(++this.count))
 	}
 })
 
 // Shared components for node recyling benchmarks
 var Header = {
 	view : function () {
-		return m("header",
-			m("h1", {class: "asdf"}, "a ", "b", " c ", 0, " d"),
-			m("nav",
-				m("a", {href: "/foo"}, "Foo"),
-				m("a", {href: "/bar"}, "Bar")
+		return mBinding("header",
+			mBinding("h1", {class: "asdf"}, "a ", "b", " c ", 0, " d"),
+			mBinding("nav",
+				mBinding("a", {href: "/foo"}, "Foo"),
+				mBinding("a", {href: "/bar"}, "Bar")
 			)
-		)
+		);
 	}
 }
 
 var Form = {
 	view : function () {
-		return m("form", {onSubmit: function onSubmit() {}},
-			m("input", {type: "checkbox", checked: true}),
-			m("input", {type: "checkbox", checked: false}),
-			m("fieldset",
-				m("label",
-					m("input", {type: "radio", checked: true})
+		return mBinding("form", {onSubmit: function onSubmit() {}},
+			mBinding("input", {type: "checkbox", checked: true}),
+			mBinding("input", {type: "checkbox", checked: false}),
+			mBinding("fieldset",
+				mBinding("label",
+					mBinding("input", {type: "radio", checked: true})
 				),
-				m("label",
-					m("input", {type: "radio"})
+				mBinding("label",
+					mBinding("input", {type: "radio"})
 				)
 			),
-			m(ButtonBar, null)
-		)
+			mBinding(ButtonBar, null)
+		);
 	}
 }
 
 var ButtonBar = {
 	view : function () {
-		return m("button-bar",
-			m(Button,
+		return mBinding("button-bar",
+			mBinding(Button,
 				{style: "width:10px; height:10px; border:1px solid #FFF;"},
 				"Normal CSS"
 			),
-			m(Button,
+			mBinding(Button,
 				{style: "top:0 ; right: 20"},
 				"Poor CSS"
 			),
-			m(Button,
+			mBinding(Button,
 				{style: "invalid-prop:1;padding:1px;font:12px/1.1 arial,sans-serif;", icon: true},
 				"Poorer CSS"
 			),
-			m(Button,
+			mBinding(Button,
 				{style: {margin: 0, padding: "10px", overflow: "visible"}},
 				"Object CSS"
 			)
-		)
+		);
 	}
 }
 
 var Button = {
 	view : function (vnode) {
-		return m("button", vnode.attrs, vnode.children)
+		return mBinding("button", vnode.attrs, vnode.children);
 	}
 }
 
 var Main = {
 	view : function () {
-		return m(Form)
+		return mBinding(Form);
 	}
 }
 
 var Root = {
 	view : function () {
-		return m("div",
+		return mBinding("div",
 			{class: "foo bar", "data-foo": "bar", p: 2},
-			m(Header, null),
-			m(Main, null)
-		)
+			mBinding(Header, null),
+			mBinding(Main, null)
+		);
 	}
 }
 
 suite.add({
 	name : "repeated trees (recycling)",
 	fn : function () {
-		m.render(scratch, [m(Root)])
-		m.render(scratch, [])
+		mBinding.render(scratch, [mBinding(Root)])
+		mBinding.render(scratch, [])
 	}
 })
 
 suite.add({
 	name : "repeated trees (no recycling)",
 	fn : function () {
-		m.render(scratch, [m(Root)])
-		m.render(scratch, [])
+		mBinding.render(scratch, [mBinding(Root)])
+		mBinding.render(scratch, [])
 
 		// Second empty render is to clear out the pool of nodes
 		// so that there's nothing that can be recycled
-		m.render(scratch, [])
+		mBinding.render(scratch, [])
 	}
 })
 

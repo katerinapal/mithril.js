@@ -1,5 +1,4 @@
 "use strict"
-/** @constructor */
 var PromisePolyfill = function(executor) {
 	if (!(this instanceof PromisePolyfill)) throw new Error("Promise must be called with `new`")
 	if (typeof executor !== "function") throw new TypeError("executor must be a function")
@@ -43,7 +42,11 @@ var PromisePolyfill = function(executor) {
 	}
 
 	executeOnce(executor)
-}
+};
+
+/** @constructor */
+export default PromisePolyfill;
+
 PromisePolyfill.prototype.then = function(onFulfilled, onRejection) {
 	var self = this, instance = self._instance
 	function handle(callback, list, next, state) {
@@ -101,6 +104,4 @@ if (typeof window !== "undefined") {
 } else if (typeof global !== "undefined") {
 	if (typeof global.Promise === "undefined") global.Promise = PromisePolyfill
 	module.exports = global.Promise
-} else {
-	module.exports = PromisePolyfill
-}
+} else {}

@@ -1,10 +1,9 @@
+import coreRouter from "../router/router";
+import Promise from "../promise/promise";
+import Vnode from "../render/vnode";
 "use strict"
 
-var Vnode = require("../render/vnode")
-var Promise = require("../promise/promise")
-var coreRouter = require("../router/router")
-
-module.exports = function($window, redrawService) {
+export default function($window, redrawService) {
 	var routeService = coreRouter($window)
 
 	var identity = function(v) {return v}
@@ -65,4 +64,4 @@ module.exports = function($window, redrawService) {
 	}
 
 	return route
-}
+};;

@@ -1,9 +1,8 @@
+import parseQueryString from "../querystring/parse";
+import buildQueryString from "../querystring/build";
 "use strict"
 
-var buildQueryString = require("../querystring/build")
-var parseQueryString = require("../querystring/parse")
-
-module.exports = function($window) {
+export default function($window) {
 	var supportsPushState = typeof $window.history.pushState === "function"
 	var callAsync = typeof setImmediate === "function" ? setImmediate : setTimeout
 
@@ -110,4 +109,4 @@ module.exports = function($window) {
 	}
 
 	return router
-}
+};;

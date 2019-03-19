@@ -1,6 +1,6 @@
 "use strict"
 
-module.exports = function(object) {
+export default function(object) {
 	if (Object.prototype.toString.call(object) !== "[object Object]") return ""
 
 	var args = []
@@ -23,4 +23,4 @@ module.exports = function(object) {
 		}
 		else args.push(encodeURIComponent(key) + (value != null && value !== "" ? "=" + encodeURIComponent(value) : ""))
 	}
-}
+};;

@@ -1,3 +1,4 @@
+import apiredraw_moduleDefault from "./api/redraw";
 "use strict"
 
-module.exports = require("./api/redraw")(window)
+export default apiredraw_moduleDefault(window);;

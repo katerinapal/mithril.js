@@ -1,6 +1,6 @@
 "use strict"
 
-module.exports = function(string) {
+export default function(string) {
 	if (string === "" || string == null) return {}
 	if (string.charAt(0) === "?") string = string.slice(1)
 
@@ -32,4 +32,4 @@ module.exports = function(string) {
 		}
 	}
 	return data
-}
+};;

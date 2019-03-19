@@ -127,11 +127,11 @@ function run(input, output) {
 	}
 }
 
-module.exports = function(input, output, options) {
+export default function(input, output, options) {
 	run(input, output)
 	if (options && options.watch) {
 		fs.watch(process.cwd(), {recursive: true}, function(file) {
 			if (typeof file === "string" && path.resolve(output) !== path.resolve(file)) run(input, output)
 		})
 	}
-}
+};;
